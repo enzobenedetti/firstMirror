@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 using Mirror;
 using UnityEditor.Timeline.Actions;
@@ -15,6 +16,14 @@ public class PlayerMovement : NetworkBehaviour
 {
 	public float speed = 10f;
 	public GameObject lightLamp;
+	public GameObject hiderLamp;
+	private CharacterController _charaCont;
+	private GameObject _cam;
+
+	private void Awake()
+	{
+		_charaCont = GetComponent<CharacterController>();
+	}
 
 	private void Start()
 	{
@@ -22,11 +31,25 @@ public class PlayerMovement : NetworkBehaviour
 		Debug.Log(isLocalPlayer);
 		
 		if (!isLocalPlayer) return;
+
+		if (isClientOnly)
+		{
+			Debug.Log("pppopopopop");
+			GameObject lamp = Instantiate(lightLamp, transform);
+			//NetworkServer.Spawn(lamp);
+		}
+		else
+		{
+			GameObject lamp = Instantiate(hiderLamp, transform);
+		}
 		
-		Debug.Log("pppopopopop");
-		GameObject lamp = Instantiate(lightLamp, transform);
-		NetworkServer.Spawn(lamp); 
-			
+		SetCameraChild();
+	}
+
+	void SetCameraChild()
+	{
+		_cam = FindObjectOfType<Camera>().gameObject;
+		_cam.transform.position = transform.position + Vector3.up * 5f;
 	}
 
 	#region Start & Stop Callbacks
@@ -57,7 +80,9 @@ public class PlayerMovement : NetworkBehaviour
     /// This is invoked on clients when the server has caused this object to be destroyed.
     /// <para>This can be used as a hook to invoke effects or do client specific cleanup.</para>
     /// </summary>
-    public override void OnStopClient() { }
+    public override void OnStopClient()
+    {
+    }
 
     /// <summary>
     /// Called when the local player object has been set up.
@@ -94,13 +119,17 @@ public class PlayerMovement : NetworkBehaviour
 	    {
 		    MovePlayer(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 	    }
+	    
+	    transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+	    
+	    _cam.transform.position = transform.position + Vector3.up * 5f;
     }
     
     [Command]
     void MovePlayer(float horizontalMove, float verticalMove)
     {
-	    transform.position +=
-		    new Vector3(horizontalMove * speed * Time.deltaTime, 0f, verticalMove * speed * Time.deltaTime);
+	    //transform.position += new Vector3(horizontalMove * speed * Time.deltaTime, 0f, verticalMove * speed * Time.deltaTime);
 	    transform.LookAt(transform.position + new Vector3(horizontalMove, 0f, verticalMove));
+	    _charaCont.Move(new Vector3(horizontalMove * speed * Time.deltaTime, 0f, verticalMove * speed * Time.deltaTime));
     }
 }
