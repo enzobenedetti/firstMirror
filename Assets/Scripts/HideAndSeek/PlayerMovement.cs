@@ -18,29 +18,29 @@ public class PlayerMovement : NetworkBehaviour
 	public GameObject lightLamp;
 	public GameObject hiderLamp;
 	private CharacterController _charaCont;
+	private CatchHider _catchHider;
 	private GameObject _cam;
 
 	private void Awake()
 	{
 		_charaCont = GetComponent<CharacterController>();
+		_catchHider = GetComponent<CatchHider>();
 	}
 
 	private void Start()
 	{
-		Debug.Log("grignr");
-		Debug.Log(isLocalPlayer);
-		
 		if (!isLocalPlayer) return;
 
 		if (isClientOnly)
 		{
 			Debug.Log("pppopopopop");
 			GameObject lamp = Instantiate(lightLamp, transform);
-			//NetworkServer.Spawn(lamp);
+			_catchHider.isHider = false;
 		}
 		else
 		{
 			GameObject lamp = Instantiate(hiderLamp, transform);
+			_catchHider.isHider = true;
 		}
 		
 		SetCameraChild();
