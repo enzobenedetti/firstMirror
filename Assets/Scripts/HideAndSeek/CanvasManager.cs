@@ -17,6 +17,9 @@ public class CanvasManager : NetworkBehaviour
     public void StartGame()
     {
         Debug.Log("uyfufyuf");
-        FindObjectOfType<PlayerStart>().RpcBeginGame();
+        foreach (PlayerStart player in FindObjectsOfType<PlayerStart>())
+        {
+            player.RpcBeginGame();
+        }
     }
 }

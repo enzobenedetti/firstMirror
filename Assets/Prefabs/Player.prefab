@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3083364813762749886}
   - component: {fileID: 3083364813762749885}
   - component: {fileID: 3083364813762749881}
-  - component: {fileID: 2485372034502588730}
   - component: {fileID: 3083364813762749880}
   - component: {fileID: -8653048662170593835}
+  - component: {fileID: 4945884792545210826}
   - component: {fileID: -8192770980544276507}
   - component: {fileID: 6119975194537004745}
   - component: {fileID: -4361492225623300920}
@@ -106,24 +106,6 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   speed: 0.01
---- !u!114 &2485372034502588730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3083364813762749859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aefc3c25c50009642bcd7d7d625e8ae6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  playerMovement: {fileID: 3083364813762749881}
-  mesh: {fileID: 3083364813762749885}
-  lightLamp: {fileID: 2499771701452744720, guid: d899183e261cd204fbc30437581567c0, type: 3}
-  hiderLamp: {fileID: 2499771701452744720, guid: 329445e1745683e4db84bc46fb852502, type: 3}
 --- !u!114 &3083364813762749880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +157,25 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+--- !u!114 &4945884792545210826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3083364813762749859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aefc3c25c50009642bcd7d7d625e8ae6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  playerMovement: {fileID: 3083364813762749881}
+  hiderMaterial: {fileID: 2100000, guid: 082427041cbb0374ab2b95c28750a12a, type: 2}
+  seekerMaterial: {fileID: 2100000, guid: 8315e263ab09b7e4badf02255a3498b0, type: 2}
+  lightLamp: {fileID: 2499771701452744720, guid: d899183e261cd204fbc30437581567c0, type: 3}
+  hiderLamp: {fileID: 2499771701452744720, guid: 329445e1745683e4db84bc46fb852502, type: 3}
 --- !u!143 &-8192770980544276507
 CharacterController:
   m_ObjectHideFlags: 0

@@ -6,8 +6,9 @@ using UnityEngine;
 public class PlayerStart : NetworkBehaviour
 {
     public PlayerMovement playerMovement;
+    public Material hiderMaterial;
+    public Material seekerMaterial;
     private CatchHider _catchHider;
-    public MeshRenderer mesh;
     public GameObject lightLamp;
     public GameObject hiderLamp;
     private GameObject _cam;
@@ -16,16 +17,15 @@ public class PlayerStart : NetworkBehaviour
     {
         _catchHider = GetComponent<CatchHider>();
         playerMovement.enabled = false;
-        mesh.enabled = false;
     }
 
     [ClientRpc]
     public void RpcBeginGame()
     {
+        GetComponent<MeshRenderer>().material = isClientOnly ? hiderMaterial : seekerMaterial;
         if (!isLocalPlayer) return;
         
         playerMovement.enabled = true;
-        mesh.enabled = true;
 
         if (isClientOnly)
         {
