@@ -24,20 +24,23 @@ public class PlayerStart : NetworkBehaviour
     {
         GetComponent<MeshRenderer>().material = isClientOnly ? hiderMaterial : seekerMaterial;
         if (!isLocalPlayer) return;
-        
-        playerMovement.enabled = true;
 
-        if (isClientOnly)
-        {
-            GameObject lamp = Instantiate(lightLamp, transform);
-            _catchHider.isHider = false;
-        }
-        else
+        if (!isClientOnly)
         {
             GameObject lamp = Instantiate(hiderLamp, transform);
             _catchHider.isHider = true;
+            playerMovement.enabled = true;
         }
 		
         playerMovement.SetCameraChild();
+    }
+
+    [ClientRpc]
+    public void RpcBeginChase()
+    {
+        if (!isLocalPlayer || !isClientOnly) return;
+        playerMovement.enabled = true;
+        GameObject lamp = Instantiate(lightLamp, transform);
+        _catchHider.isHider = false;
     }
 }

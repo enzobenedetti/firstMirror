@@ -13,6 +13,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HideAndSeek/PlayerStart.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HideAndSeek/TimerHider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../firstMirror_clone_0/Assets/Scripts/HideAndSeek/PlayerMovement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HideAndSeek/CanvasManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HideAndSeek/CatchHider.cs" root0="FORCE_HIGHLIGHTING" />
@@ -62,7 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1652364162447</updated>
       <workItem from="1652364176043" duration="6403000" />
-      <workItem from="1652427131749" duration="11800000" />
+      <workItem from="1652427131749" duration="17794000" />
     </task>
     <servers />
   </component>
