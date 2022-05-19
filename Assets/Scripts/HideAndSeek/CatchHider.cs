@@ -13,5 +13,6 @@ public class CatchHider : NetworkBehaviour
         if (!other.gameObject.CompareTag("Player") || other.gameObject == gameObject) return;
         if (!other.gameObject.GetComponent<CatchHider>().isHider) return;
         Destroy(other.gameObject);
+        FindObjectOfType<CanvasManager>().gameStarted = false;
     }
 }
