@@ -12,7 +12,28 @@ public class CatchHider : NetworkBehaviour
     {
         if (!other.gameObject.CompareTag("Player") || other.gameObject == gameObject) return;
         if (!other.gameObject.GetComponent<CatchHider>().isHider) return;
-        Destroy(other.gameObject);
+        CallEndGame();
         FindObjectOfType<CanvasManager>().gameStarted = false;
+    }
+
+    [Command]
+    public void CallEndGame()
+    {
+        foreach (CatchHider hider in FindObjectsOfType<CatchHider>())
+        {
+            hider.ResetGame();
+        }
+    }
+
+    [ClientRpc]
+    public void ResetGame()
+    {
+        if (isLocalPlayer && transform.GetChild(1).gameObject.TryGetComponent(out Light o))
+        {
+            TimerHider.ResetTimer();
+            Destroy(gameObject.GetComponentInChildren<Light>().gameObject);
+            GetComponent<PlayerMovement>().enabled = false;
+        }
+            
     }
 }

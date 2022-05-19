@@ -6,11 +6,11 @@ using UnityEngine;
 public class TimerHider : NetworkBehaviour
 {
     private float _timeToHide = 10f;
-    private bool _hided;
+    private static bool _hided;
     private float _timeToSeek = 60f;
 
     private static bool _timerOn;
-    private float _timer;
+    private static float _timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,12 +32,19 @@ public class TimerHider : NetworkBehaviour
         }
         if (_timer >= _timeToSeek)
         {
-            //Hider Win
+            FindObjectOfType<CatchHider>().CallEndGame();
         }
     }
 
     public static void StartTimer()
     {
         _timerOn = true;
+    }
+
+    public static void ResetTimer()
+    {
+        _timerOn = false;
+        _timer = 0f;
+        _hided = false;
     }
 }

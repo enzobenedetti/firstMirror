@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerStart : NetworkBehaviour
 {
     public PlayerMovement playerMovement;
+    private Vector3 spawnedPosition;
     public Material hiderMaterial;
     public Material seekerMaterial;
     private CatchHider _catchHider;
@@ -19,6 +20,7 @@ public class PlayerStart : NetworkBehaviour
     void Awake()
     {
         _catchHider = GetComponent<CatchHider>();
+        spawnedPosition = transform.position;
         playerMovement.enabled = false;
     }
     
@@ -34,6 +36,11 @@ public class PlayerStart : NetworkBehaviour
     public void RpcBeginGame(int hider)
     {
         _catchHider.isHider = hider == indexPlayer;
+        if (transform.position != spawnedPosition)
+        {
+            transform.position = spawnedPosition;
+            transform.rotation = Quaternion.identity;
+        }
         GetComponent<MeshRenderer>().material = _catchHider.isHider ? hiderMaterial : seekerMaterial;
         if (!isLocalPlayer) return;
 

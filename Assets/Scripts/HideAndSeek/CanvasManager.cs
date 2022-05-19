@@ -24,23 +24,11 @@ public class CanvasManager : NetworkBehaviour
     {
         startButton.interactable = !isClientOnly;
     }
-    
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-        ChangePlayersNumber(1);
-    }
-
-    public override void OnStopClient()
-    {
-        base.OnStopClient();
-        ChangePlayersNumber(-1);
-    }
 
     [Command(requiresAuthority = false)]
-    void ChangePlayersNumber(int modificator)
+    void ChangePlayersNumber()
     {
-        playersNumber += modificator;
+        playersNumber = NetworkManager.singleton.numPlayers;
         foreach (PlayerStart player in FindObjectsOfType<PlayerStart>())
         {
             player.SetIndex(playersNumber - 1);
@@ -49,6 +37,7 @@ public class CanvasManager : NetworkBehaviour
 
     private void Update()
     {
+        ChangePlayersNumber();
         playerNumber.text = "Player in room : " + playersNumber;
         foreach (CatchHider catchHider in FindObjectsOfType<CatchHider>())
         {
