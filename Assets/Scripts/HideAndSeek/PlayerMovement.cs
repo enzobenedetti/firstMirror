@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Resources;
 using UnityEngine;
 using Mirror;
-using UnityEditor.Timeline.Actions;
 
 /*
 	Documentation: https://mirror-networking.gitbook.io/docs/guides/networkbehaviour
@@ -30,7 +29,7 @@ public class PlayerMovement : NetworkBehaviour
 	    
 	    if (Input.GetButton("Vertical") || Input.GetButton("Horizontal"))
 	    {
-		    MovePlayer(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		    MovePlayer(Input.GetAxisRaw("Horizontal") * Time.deltaTime, Input.GetAxisRaw("Vertical") * Time.deltaTime);
 	    }
 	    
 	    transform.position = new Vector3(transform.position.x, 0f, transform.position.z);

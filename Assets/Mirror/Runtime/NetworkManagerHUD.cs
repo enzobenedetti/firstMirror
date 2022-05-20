@@ -46,7 +46,7 @@ namespace Mirror
                 }
             }
 
-            StopButtons();
+            //StopButtons();
 
             GUILayout.EndArea();
         }
@@ -56,13 +56,13 @@ namespace Mirror
             if (!NetworkClient.active)
             {
                 // Server + Client
-                if (Application.platform != RuntimePlatform.WebGLPlayer)
-                {
-                    if (GUILayout.Button("Host (Server + Client)"))
-                    {
-                        manager.StartHost();
-                    }
-                }
+                // if (Application.platform != RuntimePlatform.WebGLPlayer)
+                // {
+                //     if (GUILayout.Button("Host (Server + Client)"))
+                //     {
+                //         manager.StartHost();
+                //     }
+                // }
 
                 // Client + IP
                 GUILayout.BeginHorizontal();
@@ -75,15 +75,15 @@ namespace Mirror
                 GUILayout.EndHorizontal();
 
                 // Server Only
-                if (Application.platform == RuntimePlatform.WebGLPlayer)
-                {
-                    // cant be a server in webgl build
-                    GUILayout.Box("(  WebGL cannot be server  )");
-                }
-                else
-                {
-                    if (GUILayout.Button("Server Only")) manager.StartServer();
-                }
+                // if (Application.platform == RuntimePlatform.WebGLPlayer)
+                // {
+                //     // cant be a server in webgl build
+                //     GUILayout.Box("(  WebGL cannot be server  )");
+                // }
+                // else
+                // {
+                //     if (GUILayout.Button("Server Only")) manager.StartServer();
+                // }
             }
             else
             {

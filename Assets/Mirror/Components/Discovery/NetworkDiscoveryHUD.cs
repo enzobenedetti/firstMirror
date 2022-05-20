@@ -40,7 +40,7 @@ namespace Mirror.Discovery
 
         void DrawGUI()
         {
-            GUILayout.BeginArea(new Rect(10, 10, 300, 500));
+            GUILayout.BeginArea(new Rect(10, 40, 300, 500));
             GUILayout.BeginHorizontal();
 
             if (GUILayout.Button("Find Servers"))
@@ -58,12 +58,12 @@ namespace Mirror.Discovery
             }
 
             // Dedicated server
-            if (GUILayout.Button("Start Server"))
-            {
-                discoveredServers.Clear();
-                NetworkManager.singleton.StartServer();
-                networkDiscovery.AdvertiseServer();
-            }
+            // if (GUILayout.Button("Start Server"))
+            // {
+            //     discoveredServers.Clear();
+            //     NetworkManager.singleton.StartServer();
+            //     networkDiscovery.AdvertiseServer();
+            // }
 
             GUILayout.EndHorizontal();
 

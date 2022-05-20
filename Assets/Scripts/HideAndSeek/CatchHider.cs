@@ -10,6 +10,7 @@ public class CatchHider : NetworkBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if (!FindObjectOfType<CanvasManager>().gameStarted) return;
         if (!other.gameObject.CompareTag("Player") || other.gameObject == gameObject) return;
         if (!other.gameObject.GetComponent<CatchHider>().isHider) return;
         CallEndGame();
