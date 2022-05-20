@@ -17,6 +17,7 @@ public class CanvasManager : NetworkBehaviour
 
     public GameObject lobbyHolder;
     public GameObject gameHolder;
+    public GameObject quitCanvas;
     [SyncVar] public int playersNumber;
     private int hiderIndex;
 
@@ -25,6 +26,11 @@ public class CanvasManager : NetworkBehaviour
     void Start()
     {
         startButton.interactable = !isClientOnly;
+    }
+
+    private void OnConnectedToServer()
+    {
+        quitCanvas.SetActive(false);
     }
 
     [Command(requiresAuthority = false)]
@@ -82,6 +88,18 @@ public class CanvasManager : NetworkBehaviour
         }
         
         TimerHider.StartTimer();
+        LaunchAudio();
         gameStarted = true;
+    }
+
+    [ClientRpc]
+    void LaunchAudio()
+    {
+        FindObjectOfType<AudioSource>().Play();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
