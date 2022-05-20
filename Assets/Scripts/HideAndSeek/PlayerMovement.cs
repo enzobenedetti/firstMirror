@@ -27,11 +27,8 @@ public class PlayerMovement : NetworkBehaviour
 	    if (!isLocalPlayer) return;
 	    if (_cam == null) SetCameraChild();
 	    
-	    if (Input.GetButton("Vertical") || Input.GetButton("Horizontal"))
-	    {
-		    MovePlayer(Input.GetAxisRaw("Horizontal") * Time.deltaTime, Input.GetAxisRaw("Vertical") * Time.deltaTime);
-	    }
-	    
+	    MovePlayer(Input.GetAxisRaw("Horizontal") * Time.deltaTime, Input.GetAxisRaw("Vertical") * Time.deltaTime);
+
 	    transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
 	    
 	    _cam.transform.position = transform.position + Vector3.up * 5f;
