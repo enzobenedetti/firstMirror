@@ -13,16 +13,16 @@ public class CatchHider : NetworkBehaviour
         if (!other.gameObject.CompareTag("Player") || other.gameObject == gameObject) return;
         if (!other.gameObject.GetComponent<CatchHider>().isHider) return;
         CallEndGame();
-        FindObjectOfType<CanvasManager>().gameStarted = false;
     }
 
-    [Command]
+    [Command (requiresAuthority = false)]
     public void CallEndGame()
     {
         foreach (CatchHider hider in FindObjectsOfType<CatchHider>())
         {
             hider.ResetGame();
         }
+        FindObjectOfType<CanvasManager>().gameStarted = false;
     }
 
     [ClientRpc]

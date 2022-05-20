@@ -12,6 +12,8 @@ public class CanvasManager : NetworkBehaviour
 
     public Text playerNumber;
     public Text gameGoal;
+    public Text timeLeft;
+    [SyncVar] private string timeText;
 
     public GameObject lobbyHolder;
     public GameObject gameHolder;
@@ -52,12 +54,21 @@ public class CanvasManager : NetworkBehaviour
         {
             lobbyHolder.SetActive(false);
             gameHolder.SetActive(true);
+            int timerText = 60 - (int)(TimerHider.timer);
+            UpdateTime(timerText);
+            timeLeft.text = timeText;
         }
         else
         {
             lobbyHolder.SetActive(true);
             gameHolder.SetActive(false);
         }
+    }
+
+    [Command(requiresAuthority = false)]
+    void UpdateTime(int timer)
+    {
+        timeText = timer.ToString();
     }
 
     [Command(requiresAuthority = false)]

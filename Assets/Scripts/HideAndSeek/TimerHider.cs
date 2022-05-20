@@ -10,7 +10,7 @@ public class TimerHider : NetworkBehaviour
     private float _timeToSeek = 60f;
 
     private static bool _timerOn;
-    private static float _timer;
+    public static float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +21,8 @@ public class TimerHider : NetworkBehaviour
     void Update()
     {
         if (!_timerOn) return;
-        _timer += Time.deltaTime;
-        if (_timer >= _timeToHide && !_hided)
+        UpdateTimer();
+        if (timer >= _timeToHide && !_hided)
         {
             _hided = true;
             foreach (PlayerStart player in FindObjectsOfType<PlayerStart>())
@@ -30,10 +30,16 @@ public class TimerHider : NetworkBehaviour
                 player.RpcBeginChase();
             }
         }
-        if (_timer >= _timeToSeek)
+        if (timer >= _timeToSeek)
         {
             FindObjectOfType<CatchHider>().CallEndGame();
         }
+    }
+
+    [Command (requiresAuthority = false)]
+    void UpdateTimer()
+    {
+        timer += Time.deltaTime;
     }
 
     public static void StartTimer()
@@ -44,7 +50,7 @@ public class TimerHider : NetworkBehaviour
     public static void ResetTimer()
     {
         _timerOn = false;
-        _timer = 0f;
+        timer = 0f;
         _hided = false;
     }
 }
